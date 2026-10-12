@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Profil — NovaTrade</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=demo-academy-20261012">
+</head>
+<body>
+<canvas id="bg-canvas"></canvas><div class="bg-glow"></div>
+<div id="shell"></div>
+<div class="container">
+  <div class="prof-head">
+    <div class="avatar" id="demoAvatar">TD</div>
+    <div><h1 class="section-title" id="demoProfileName" style="margin:0">Trader Demo</h1><p class="section-sub">Compte de simulation local • membre depuis <span id="since"></span></p></div>
+    <div style="margin-left:auto;display:flex;gap:10px">
+      <button class="btn btn-ghost" onclick="openSettings()">⚙ Reglages</button>
+    </div>
+  </div>
+  <section class="demo-account-card card">
+    <div class="demo-account-copy">
+      <span class="pill">COMPTE DE SIMULATION</span>
+      <h2>Créer et personnaliser ton compte</h2>
+      <p class="section-sub">Choisis un nom et un capital virtuel pour ton prochain portefeuille démo.</p>
+    </div>
+    <form id="demoAccountForm" class="demo-account-form">
+      <label for="demoName">Nom du compte</label>
+      <input id="demoName" type="text" maxlength="32" required>
+      <label for="demoCapital">Capital initial (USDT)</label>
+      <input id="demoCapital" type="number" min="1000" max="1000000" step="1000" required>
+      <div class="demo-account-actions">
+        <button class="btn btn-ghost" type="submit">Enregistrer le profil</button>
+        <button class="btn btn-primary" id="createDemoAccount" type="button">Créer un nouveau compte démo</button>
+      </div>
+      <p class="hint">Créer un nouveau compte efface le portefeuille, les positions et l’historique actuels. L’enregistrement du profil seul ne modifie pas le solde en cours.</p>
+    </form>
+  </section>
+  <div class="prof-grid" id="stats"></div>
+  <div class="card" style="padding:22px;margin:16px 0">
+    <div style="display:flex;justify-content:space-between;margin-bottom:8px"><b>Taux de reussite (Win rate)</b><b class="num" id="wrPct">--</b></div>
+    <div class="win-bar"><div id="wrBar" style="width:0%"></div></div>
+    <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12.5px" class="muted"><span id="wins">0 gagnants</span><span id="losses">0 perdants</span></div>
+  </div>
+  <div class="card" style="padding:22px;margin-bottom:30px">
+    <h3 style="margin-bottom:14px">Historique complet des trades fermes</h3>
+    <div style="overflow:auto" id="histWrap"></div>
+  </div>
+</div>
+<div id="footer"></div>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/engine.js"></script>
+<script src="assets/js/profile.js"></script>
+</body>
+</html>

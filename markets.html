@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Marches — NovaTrade</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<canvas id="bg-canvas"></canvas><div class="bg-glow"></div>
+<div id="shell"></div>
+<div class="container">
+  <div class="mk-head">
+    <div><h1 class="section-title">Marches crypto</h1><p class="section-sub">Prix reels en direct • Binance & CoinGecko</p></div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <div class="search"><span class="muted">🔍</span><input id="q" placeholder="Rechercher BTC, ETH, SOL..."></div>
+    </div>
+  </div>
+  <div class="tabs" id="tabs" style="margin-bottom:16px;width:max-content">
+    <button class="active" data-t="all">Toutes</button>
+    <button data-t="fav">★ Favoris</button>
+    <button data-t="gainers">Gainers</button>
+    <button data-t="losers">Losers</button>
+    <button data-t="vol">Volume</button>
+  </div>
+  <div class="card" style="overflow:auto">
+    <table class="mk">
+      <thead><tr>
+        <th data-s="star" style="width:30px"></th>
+        <th data-s="name">Paire</th>
+        <th data-s="price">Dernier prix</th>
+        <th data-s="ch1">1h %</th>
+        <th data-s="ch24">24h %</th>
+        <th data-s="ch7">7j %</th>
+        <th data-s="vol">Volume 24h</th>
+        <th data-s="cap">Cap. marche</th>
+        <th>Graphe 7j</th>
+        <th></th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <p class="muted" style="font-size:12px;padding:16px 2px">⚠ Donnees fournies a titre informatif. Plateforme de simulation — « Trader en demo » ouvre un ordre virtuel.</p>
+</div>
+<div id="footer"></div>
+<script src="https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/markets.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NovaTrade — Simulateur de trading crypto avec donnees reelles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<canvas id="bg-canvas"></canvas><div class="bg-glow"></div>
+<div id="shell"></div>
+
+<section class="hero">
+  <div class="container">
+    <div class="pill" style="margin-bottom:20px">⚡ Donnees reelles Binance & CoinGecko — 100% simule</div>
+    <h1>Apprends a trader avec les <span class="grad">vrais marches</span>, sans risquer ton argent.</h1>
+    <p>Portefeuille virtuel de 10 000 USDT, prix reels en temps reel, graphiques professionnels et outils d'analyse technique. Le paper trading comme un pro.</p>
+    <div class="hero-cta">
+      <a href="trading.html" class="btn btn-primary btn-lg">Commencer en demo →</a>
+      <a href="markets.html" class="btn btn-ghost btn-lg">Explorer les marches</a>
+    </div>
+  </div>
+  <div class="ticker-wrap"><div class="ticker" id="ticker"></div></div>
+</section>
+
+<section class="container">
+  <div class="stats">
+    <div class="stat card fade-up"><div class="v" data-count="128000">0</div><div class="l">Traders en demo</div></div>
+    <div class="stat card fade-up"><div class="v" data-count="420">0</div><div class="l">Paires disponibles</div></div>
+    <div class="stat card fade-up"><div class="v" data-count="3400000">0</div><div class="l">Ordres simules</div></div>
+    <div class="stat card fade-up"><div class="v" id="vol-stat">0</div><div class="l">Volume marche 24h</div></div>
+  </div>
+</section>
+
+<section class="container sect">
+  <div class="fade-up" style="text-align:center;margin-bottom:36px">
+    <h2 class="section-title">Tout pour maitriser le trading</h2>
+    <p class="section-sub">Un environnement complet, realiste et sans risque.</p>
+  </div>
+  <div class="feat-grid" id="feats"></div>
+</section>
+
+<section class="container sect">
+  <div class="card fade-up" style="padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center">
+    <div>
+      <div class="pill" style="margin-bottom:16px">🔒 Securite & pedagogie</div>
+      <h2 class="section-title">Zero risque financier reel</h2>
+      <p class="section-sub" style="margin-bottom:18px">Aucune donnee bancaire. Aucun depot. Aucun retrait. NovaTrade reproduit fidelement les mecaniques d'un exchange (prix, carnet d'ordres, levier, liquidation) avec de l'argent 100% virtuel.</p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+        <li>✓ Prix, volumes et bougies reels du marche</li>
+        <li>✓ Levier simule jusqu'a 50x, Long & Short</li>
+        <li>✓ Take Profit, Stop Loss et liquidation automatiques</li>
+        <li>✓ Reinitialise ton compte demo quand tu veux</li>
+      </ul>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:24px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:14px"><span class="muted">Portefeuille demo</span><span class="up">● En direct</span></div>
+      <div style="font-size:34px;font-weight:800" class="num">10 000.00 <span style="font-size:16px" class="muted">USDT</span></div>
+      <div class="muted" style="margin-top:6px">Virtuel • renouvelable • sans engagement</div>
+    </div>
+  </div>
+</section>
+
+<section class="container sect">
+  <div class="fade-up" style="text-align:center;margin-bottom:30px"><h2 class="section-title">Ils apprennent avec NovaTrade</h2></div>
+  <div class="testi-grid" id="testi"></div>
+</section>
+
+<section class="container sect" style="max-width:760px">
+  <div class="fade-up" style="text-align:center;margin-bottom:24px"><h2 class="section-title">Questions frequentes</h2></div>
+  <div id="faq" class="fade-up"></div>
+</section>
+
+<div id="footer"></div>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/home.js"></script>
+</body>
+</html>

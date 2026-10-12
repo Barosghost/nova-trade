@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Analyse & Simulation — NovaTrade</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<canvas id="bg-canvas"></canvas><div class="bg-glow"></div>
+<div id="shell"></div>
+<div class="container">
+  <div style="padding:26px 0 2px"><h1 class="section-title">Analyse de performance & Simulation</h1>
+    <p class="section-sub">Calculateur de trade, metriques, Monte Carlo, backtesting et predicteur IA.</p></div>
+  <div class="warn-box">⚠ Les predictions sont probabilistes et educatives. Elles ne garantissent aucun resultat. Le trading comporte des risques.</div>
+  <div class="an-tabs" id="anTabs">
+    <button class="active" data-t="calc">🧮 Calculateur</button>
+    <button data-t="perf">📊 Metriques</button>
+    <button data-t="mc">🎲 Monte Carlo</button>
+    <button data-t="bt">⏪ Backtesting</button>
+    <button data-t="ai">🔮 Predicteur IA</button>
+    <button data-t="agnes">🤖 Agnes</button>
+  </div>
+  <div id="anView"></div>
+</div>
+<div id="footer"></div>
+<script src="https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/indicators.js"></script>
+<script src="assets/js/engine.js"></script>
+<script src="assets/js/analytics.js"></script>
+</body>
+</html>

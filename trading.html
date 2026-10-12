@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trading — NovaTrade</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=trading-layout-20261012">
+</head>
+<body>
+<canvas id="bg-canvas"></canvas><div class="bg-glow"></div>
+<div id="shell"></div>
+
+<div class="trade-wrap">
+  <!-- barre paire -->
+  <div class="pair-bar card">
+    <div class="pair-select">
+      <button class="pair-sel" id="pairSel" type="button" aria-haspopup="listbox" aria-expanded="false">
+        <span id="pairName">BTC/USDT</span><span class="chev">▾</span>
+      </button>
+      <div class="pair-dd" id="pairDd" role="listbox" aria-label="Choisir une paire de trading"></div>
+    </div>
+    <div class="pair-stat"><span class="l">Dernier prix</span><span class="v num" id="pLast">--</span></div>
+    <div class="pair-stat"><span class="l">24h %</span><span class="v num" id="pChg">--</span></div>
+    <div class="pair-stat"><span class="l">24h Haut</span><span class="v num" id="pHigh">--</span></div>
+    <div class="pair-stat"><span class="l">24h Bas</span><span class="v num" id="pLow">--</span></div>
+    <div class="pair-stat"><span class="l">Volume 24h</span><span class="v num" id="pVol">--</span></div>
+  </div>
+
+  <!-- colonne graphique -->
+  <div class="chart-col">
+    <div class="chart-card card">
+      <div class="chart-toolbar">
+        <span id="tfs"></span>
+        <span style="width:1px;height:18px;background:var(--border);margin:0 4px"></span>
+        <span id="inds"></span>
+        <div class="quick-trade" role="group" aria-label="Ordres rapides au marché">
+          <button id="quickSell" class="quick-trade-btn quick-sell" type="button" title="Vendre au marché avec la quantité saisie. Simulation uniquement.">
+            <span>Vendre</span><b id="quickBid">--</b>
+          </button>
+          <button id="quickBuy" class="quick-trade-btn quick-buy" type="button" title="Acheter au marché avec la quantité saisie. Simulation uniquement.">
+            <span>Acheter</span><b id="quickAsk">--</b>
+          </button>
+        </div>
+        <button class="ind-btn" onclick="toggleFull()">⛶ Plein ecran</button>
+      </div>
+      <div id="chart"></div>
+      <div id="drawTools" class="draw-tools draw-palette" role="toolbar" aria-label="Outils de dessin">
+        <button class="draw-btn" data-action="togglePalette" title="Replier les outils" aria-label="Replier les outils" aria-expanded="true">−</button>
+        <span class="tool-divider palette-divider" aria-hidden="true"></span>
+        <button class="draw-btn active" data-draw="cursor" title="Sélectionner ou déplacer" aria-label="Sélectionner" aria-pressed="true">↖</button>
+        <span class="tool-divider" aria-hidden="true"></span>
+        <button class="draw-btn" data-draw="trend" title="Ligne de tendance : deux clics" aria-label="Ligne de tendance" aria-pressed="false">／</button>
+        <button class="draw-btn" data-draw="polyline" title="Polyligne : clique pour ajouter des points, clic droit pour terminer" aria-label="Polyligne" aria-pressed="false">⌁</button>
+        <button class="draw-btn" data-draw="brush" title="Pinceau : dessine en maintenant le clic" aria-label="Pinceau" aria-pressed="false">✎</button>
+        <button class="draw-btn" data-draw="horizontal" title="Ligne horizontale" aria-label="Ligne horizontale" aria-pressed="false">━</button>
+        <button class="draw-btn" data-draw="vertical" title="Ligne verticale" aria-label="Ligne verticale" aria-pressed="false">┃</button>
+        <button class="draw-btn" data-draw="ray" title="Rayon horizontal" aria-label="Rayon horizontal" aria-pressed="false">⟶</button>
+        <button class="draw-btn" data-draw="rectangle" title="Rectangle : deux clics" aria-label="Rectangle" aria-pressed="false">▱</button>
+        <button class="draw-btn" data-draw="ellipse" title="Ellipse : deux clics" aria-label="Ellipse" aria-pressed="false">◯</button>
+        <button class="draw-btn fib-btn" data-draw="fibonacci" title="Retracements de Fibonacci : deux clics" aria-label="Retracements de Fibonacci" aria-pressed="false">Fib</button>
+        <button class="draw-btn" data-draw="channel" title="Canal parallèle : trois clics" aria-label="Canal parallèle" aria-pressed="false">∥</button>
+        <button class="draw-btn" data-draw="arrow" title="Flèche : deux clics" aria-label="Flèche" aria-pressed="false">↗</button>
+        <button class="draw-btn" data-draw="marker-up" title="Marqueur de hausse" aria-label="Marqueur de hausse" aria-pressed="false">⬆</button>
+        <button class="draw-btn" data-draw="marker-down" title="Marqueur de baisse" aria-label="Marqueur de baisse" aria-pressed="false">⬇</button>
+        <button class="draw-btn" data-draw="measure" title="Mesure de prix : deux clics" aria-label="Mesure de prix" aria-pressed="false">↔</button>
+        <button class="draw-btn fib-btn" data-draw="text" title="Note : un clic, puis modifie le texte dans Objets" aria-label="Note" aria-pressed="false">T</button>
+        <span class="tool-divider" aria-hidden="true"></span>
+        <button class="draw-btn" data-action="objects" title="Objets et propriétés" aria-label="Objets et propriétés" aria-expanded="false">☷</button>
+        <button class="draw-btn" data-action="deleteSelected" title="Supprimer l’objet sélectionné" aria-label="Supprimer la sélection">⌫</button>
+        <button class="draw-btn" data-action="undo" title="Annuler le dernier tracé" aria-label="Annuler le dernier tracé">↶</button>
+        <button class="draw-btn" data-action="clear" title="Effacer tous les tracés de cette paire et unité de temps" aria-label="Effacer tous les tracés">×</button>
+      </div>
+      <aside id="drawingPanel" class="drawing-panel" aria-label="Objets du graphique" hidden>
+        <div class="drawing-panel-head">
+          <div><strong>Objets</strong><span id="drawingCount" class="drawing-count">0</span></div>
+          <button class="draw-btn" data-action="closeObjects" title="Fermer les objets" aria-label="Fermer">×</button>
+        </div>
+        <div id="drawingList" class="drawing-list"></div>
+        <section id="drawingProperties" class="drawing-properties" hidden>
+          <div class="drawing-properties-title"><strong>Propriétés</strong><button id="deleteDrawing" class="draw-btn" title="Supprimer cet objet" aria-label="Supprimer cet objet">×</button></div>
+          <label class="drawing-field">Nom<input id="drawingName" type="text" maxlength="40"></label>
+          <div class="drawing-field-row">
+            <label class="drawing-field">Couleur<input id="drawingColor" type="color" value="#FCD535"></label>
+            <label class="drawing-field">Épaisseur<select id="drawingWidth"><option value="1">Fine</option><option value="2">Normale</option><option value="3">Épaisse</option><option value="4">Très épaisse</option></select></label>
+          </div>
+          <label class="drawing-field">Trait<select id="drawingStyle"><option value="solid">Continu</option><option value="dashed">Tirets</option><option value="dotted">Pointillé</option></select></label>
+          <label id="drawingTextField" class="drawing-field" hidden>Texte<input id="drawingText" type="text" maxlength="100"></label>
+        </section>
+      </aside>
+      <div class="ta-strip">
+        <span class="muted">Analyse auto :</span>
+        <span class="ta-badge neutral" id="taVerdict">—</span>
+        <span class="muted" id="taConf"></span>
+        <span class="muted" id="taSR"></span>
+        <button class="btn btn-ghost btn-sm" style="margin-left:auto" onclick="openTA()">Panneau d'analyse →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- carnet d'ordres + trades -->
+  <div class="book-col">
+    <div class="panel card">
+      <div class="panel-h">Carnet d'ordres</div>
+      <div class="book" id="asks"></div>
+      <div class="book-mid"><span class="num" id="bookMid">--</span><span class="muted" style="font-size:12px">Spread <span id="spread">--</span></span></div>
+      <div class="book" id="bids"></div>
+    </div>
+    <div class="panel card">
+      <div class="panel-h">Trades recents</div>
+      <div class="trades-list" id="trades"></div>
+    </div>
+  </div>
+
+  <!-- formulaire -->
+  <div class="form-col">
+    <div class="panel card">
+      <div class="form-tabs">
+        <button class="active" data-ot="market">Market</button>
+        <button data-ot="limit">Limit</button>
+        <button data-ot="stop" title="Ordre Stop Market déclenché au franchissement du seuil">Stop Market</button>
+      </div>
+      <div class="side-tabs">
+        <button class="buy active" data-side="long">Acheter / Long</button>
+        <button class="sell" data-side="short">Vendre / Short</button>
+      </div>
+      <div class="form-body">
+        <div class="field" id="priceField" style="display:none"><label id="priceLabel">Prix limite (USDT)</label>
+          <div class="input"><input id="fPrice" type="number" placeholder="0.00" step="any"><span>USDT</span></div></div>
+        <div class="field"><label>Quantite</label>
+          <div class="input"><input id="fQty" type="number" placeholder="0.00"><span id="qtyUnit">BTC</span></div></div>
+        <div class="pct-row" id="pctRow"></div>
+        <div class="field"><label>Levier</label><div class="lev-row" id="levRow"></div></div>
+        <div class="field"><label>Take Profit (optionnel)</label>
+          <div class="input"><input id="fTp" type="number" placeholder="0.00"><span>USDT</span></div></div>
+        <div class="field"><label>Stop Loss (optionnel)</label>
+          <div class="input"><input id="fSl" type="number" placeholder="0.00"><span>USDT</span></div></div>
+        <div class="form-info"><span>Cout (marge)</span><b id="iCost">0.00 USDT</b></div>
+        <div class="form-info"><span>Frais (0.1%)</span><b id="iFee">0.00 USDT</b></div>
+        <div class="form-info"><span>Prix liquidation est.</span><b id="iLiq">--</b></div>
+        <div class="form-info"><span>Disponible</span><b id="iAvail">10 000 USDT</b></div>
+        <button class="submit-btn buy" id="submitBtn">Acheter / Long BTC</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- panneau bas : positions / ordres / historique -->
+  <div class="bottom-panel card">
+    <div class="bp-tabs">
+      <button class="active" data-bp="pos">Ouvert <span class="count" id="cPos">0</span></button>
+      <button data-bp="ord">En attente <span class="count" id="cOrd">0</span></button>
+      <button data-bp="hist">Fermé <span class="count" id="cClosed">0</span></button>
+    </div>
+    <div id="bpBody"></div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/indicators.js"></script>
+<script src="assets/js/engine.js"></script>
+<script src="assets/js/trading.js"></script>
+</body>
+</html>

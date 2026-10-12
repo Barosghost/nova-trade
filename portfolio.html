@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portefeuille demo — NovaTrade</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<canvas id="bg-canvas"></canvas><div class="bg-glow"></div>
+<div id="shell"></div>
+<div class="container">
+  <div style="display:flex;justify-content:space-between;align-items:center;padding-top:26px;flex-wrap:wrap;gap:12px">
+    <div><h1 class="section-title">Portefeuille demo</h1><p class="section-sub">Fonds virtuels • PnL en temps reel</p></div>
+    <button class="btn btn-ghost" onclick="resetDemo()">↺ Reinitialiser</button>
+  </div>
+  <div class="pf-grid">
+    <div class="pf-stat card"><div class="l">Valeur totale (equity)</div><div class="v num" id="sEquity">--</div></div>
+    <div class="pf-stat card"><div class="l">Solde disponible</div><div class="v num" id="sAvail">--</div></div>
+    <div class="pf-stat card"><div class="l">Marge utilisee</div><div class="v num" id="sUsed">--</div></div>
+    <div class="pf-stat card"><div class="l">PnL total</div><div class="v num" id="sPnl">--</div></div>
+  </div>
+  <div class="pf-cols">
+    <div class="card" style="padding:20px">
+      <h3 style="margin-bottom:4px">Evolution du compte</h3>
+      <p class="muted" style="font-size:13px;margin-bottom:14px">Courbe de l'equity au fil de tes trades</p>
+      <div id="pf-chart"></div>
+    </div>
+    <div class="card" style="padding:20px">
+      <h3 style="margin-bottom:14px">Repartition des actifs</h3>
+      <div id="alloc"></div>
+    </div>
+  </div>
+  <div class="card" style="padding:20px;margin:16px 0">
+    <h3 style="margin-bottom:14px">Historique des transactions</h3>
+    <div style="overflow:auto" id="histWrap"></div>
+  </div>
+</div>
+<div id="footer"></div>
+<script src="https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/engine.js"></script>
+<script src="assets/js/portfolio.js"></script>
+</body>
+</html>
